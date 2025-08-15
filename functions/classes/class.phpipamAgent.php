@@ -910,6 +910,10 @@ class phpipamAgent extends Common_functions {
 	 * @return void
 	 */
 	private function mysql_scan_discover_hosts_fping_nonthreaded ($subnets, $addresses_tmp) {
+		foreach($subnets as $sk=>$s) {
+			// ping
+			$subnets[$sk]->discovered = fping_subnet ($this->transform_to_dotted($s->subnet)."/".$s->mask);
+		}
 /*
 
 		// run separately for each host
